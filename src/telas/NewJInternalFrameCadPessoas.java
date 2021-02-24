@@ -108,6 +108,7 @@ public class NewJInternalFrameCadPessoas extends javax.swing.JInternalFrame {
         jButtonSalvarPes = new javax.swing.JButton();
         jComboBoxEtapa = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButtonAtualizaSalasCombo = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Cadastro de Pessoas");
@@ -138,34 +139,44 @@ public class NewJInternalFrameCadPessoas extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Etapa do Evento do Participante:");
 
+        jButtonAtualizaSalasCombo.setText("Atualizar as Salas apos Cadastrar");
+        jButtonAtualizaSalasCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizaSalasComboActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvarPes)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNomePessoa)
-                        .addGap(8, 8, 8)
-                        .addComponent(jTextFieldNomePessoa))
+                        .addComponent(jButtonAtualizaSalasCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSalvarPes)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxSala, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxCafe, 0, 116, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBoxEtapa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(26, 26, 26))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNomePessoa)
+                                .addGap(8, 8, 8)
+                                .addComponent(jTextFieldNomePessoa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxSala, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxCafe, 0, 116, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxEtapa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +196,9 @@ public class NewJInternalFrameCadPessoas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButtonSalvarPes)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSalvarPes)
+                    .addComponent(jButtonAtualizaSalasCombo))
                 .addContainerGap())
         );
 
@@ -222,10 +235,71 @@ public class NewJInternalFrameCadPessoas extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jButtonSalvarPesActionPerformed
+
+    private void jButtonAtualizaSalasComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizaSalasComboActionPerformed
+        // Preenche a combobox sala da tela de cadastro de pessoas.
+            
+        jComboBoxSala.removeAllItems();
+         String conteudo="";
+         String Caminho="Sala.dad";
+           try{
+           FileReader arq = new FileReader(Caminho);
+           BufferedReader lerArq = new BufferedReader(arq);
+           String linha="";
+           
+           try{
+               linha = lerArq.readLine();
+               while(linha!=null){
+                   String[] coluna = linha.split(";");
+                   conteudo += linha;
+                   linha = lerArq.readLine();
+                   jComboBoxSala.addItem(coluna[0]);
+                }
+               arq.close();
+           } catch (IOException ex) {
+               conteudo = "Erro: Nao foi possivel ler Arquivo ! ";
+           }
+       } catch(IOException ex) {
+           conteudo = "Erro: Arquivo inexistente ! ";
+       }
+        if (conteudo.contains("Erro"));
+        else {
+            }
+    
+        // Preenche a ComboBOX sala de cafe
+        
+        jComboBoxCafe.removeAllItems();
+         String conteudo2="";
+         String Caminho2="SalaCafe.dad";
+           try{
+           FileReader arq = new FileReader(Caminho2);
+           BufferedReader lerArq = new BufferedReader(arq);
+           String linha="";
+           
+           try{
+               linha = lerArq.readLine();
+               while(linha!=null){
+                   String[] coluna = linha.split(";");
+                   conteudo2 += linha;
+                   linha = lerArq.readLine();
+                   jComboBoxCafe.addItem(coluna[0]);
+                }
+               arq.close();
+           } catch (IOException ex) {
+               conteudo2 = "Erro: Nao foi possivel ler Arquivo ! ";
+           }
+       } catch(IOException ex) {
+           conteudo2 = "Erro: Arquivo inexistente ! ";
+       }
+        if (conteudo2.contains("Erro"));
+        else {
+            }
+    }//GEN-LAST:event_jButtonAtualizaSalasComboActionPerformed
             
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtualizaSalasCombo;
     private javax.swing.JButton jButtonSalvarPes;
     private javax.swing.JComboBox<String> jComboBoxCafe;
     private javax.swing.JComboBox<String> jComboBoxEtapa;
