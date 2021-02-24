@@ -3,7 +3,7 @@ Projeto Treinamento
 
 Compilação feita atraves da IDE Netbeans 8.2
 
-Instruções de uso.
+Instruções de uso:;
 inicialmente o usuario tera que cadastras as salas do evento com nome e capacidade,
 apos isso cadastrar as salas de cafe com a capacidade dos mesmos.
 Apos o cadastros das Sala e possivel cadastrar usuarios e sua etapa do evento.
