@@ -1,7 +1,7 @@
 # projetoGODev
 Projeto Treinamento
 
-A Compilação devera ser feita atraves da opcoes do IDE Netbeans 8.2
+A Compilação devera ser feita atraves da opções do IDE Netbeans 8.2
 
 <h3>Instruções de uso:</h3><br />
 <ol type="I">
