@@ -6,7 +6,6 @@
 package telas;
 
 import modeloFuncoes.FuncSalas;
-
 /**
  *
  * @author Silvio da Silva
@@ -26,8 +25,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
-        
-        
+       
     }
 
     /**
