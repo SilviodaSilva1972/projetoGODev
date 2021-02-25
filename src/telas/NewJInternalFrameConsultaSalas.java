@@ -106,6 +106,7 @@ Dados dadosArq = new Dados();
         jButtonPesquisarEtapa = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButtonAtualizarSalas = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Cosultas Salas e Etapas");
@@ -176,6 +177,13 @@ Dados dadosArq = new Dados();
 
         jLabel5.setText("ou");
 
+        jButtonAtualizarSalas.setText("Atualizar Salas apos cadastrar");
+        jButtonAtualizarSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarSalasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,13 +217,18 @@ Dados dadosArq = new Dados();
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jComboBoxConEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jComboBoxConEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonAtualizarSalas)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
+                .addComponent(jButtonAtualizarSalas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -233,7 +246,7 @@ Dados dadosArq = new Dados();
                     .addComponent(jButtonPesquisarCafe)
                     .addComponent(jButtonPesquisarEtapa))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -408,8 +421,67 @@ Dados dadosArq = new Dados();
             }
     }//GEN-LAST:event_jButtonPesquisarEtapaActionPerformed
 
+    private void jButtonAtualizarSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarSalasActionPerformed
+        // Preenche a combobox sala
+        jComboBoxConSala.removeAllItems();
+         String conteudo="";
+         String Caminho="Sala.dad";
+           try{
+           FileReader arq = new FileReader(Caminho);
+           BufferedReader lerArq = new BufferedReader(arq);
+           String linha="";
+           
+           try{
+               linha = lerArq.readLine();
+               while(linha!=null){
+                   String[] coluna = linha.split(";");
+                   conteudo += linha;
+                   linha = lerArq.readLine();
+                   jComboBoxConSala.addItem(coluna[0]);
+                }
+               arq.close();
+           } catch (IOException ex) {
+               conteudo = "Erro: Nao foi possivel ler Arquivo ! ";
+           }
+       } catch(IOException ex) {
+           conteudo = "Erro: Arquivo inexistente ! ";
+       }
+        if (conteudo.contains("Erro"));
+        else {
+            }
+        
+        // Preenche a combobox Sala Cafe
+        jComboBoxConCafe.removeAllItems();
+         String conteudoCafe="";
+         String caminhoCafe="SalaCafe.dad";
+           try{
+           FileReader arq2 = new FileReader(caminhoCafe);
+           BufferedReader lerArq2 = new BufferedReader(arq2);
+           String linha2="";
+           
+           try{
+               linha2 = lerArq2.readLine();
+               while(linha2!=null){
+                   String[] coluna2 = linha2.split(";");
+                   conteudoCafe += linha2;
+                   linha2 = lerArq2.readLine();
+                   jComboBoxConCafe.addItem(coluna2[0]);
+                }
+               arq2.close();
+           } catch (IOException ex) {
+               conteudo = "Erro: Nao foi possivel ler Arquivo ! ";
+           }
+       } catch(IOException ex) {
+           conteudo = "Erro: Arquivo inexistente ! ";
+       }
+        if (conteudo.contains("Erro"));
+        else {
+            }
+    }//GEN-LAST:event_jButtonAtualizarSalasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtualizarSalas;
     private javax.swing.JButton jButtonPesquisarCafe;
     private javax.swing.JButton jButtonPesquisarEtapa;
     private javax.swing.JButton jButtonPesquisarSala;
